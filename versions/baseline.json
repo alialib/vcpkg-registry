@@ -1,3 +1,8 @@
 {
-    "default": {}
+    "default": {
+        "skia": {
+            "baseline": "0.36.0",
+            "port-version": 0
+        }
+    }
 }
