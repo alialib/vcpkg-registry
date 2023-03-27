@@ -271,7 +271,7 @@ endif()
 
 vcpkg_gn_configure(
     SOURCE_PATH "${SOURCE_PATH}"
-    OPTIONS "${OPTIONS} skia_use_lua=false skia_enable_tools=true skia_enable_spirv_validation=false"
+    OPTIONS "${OPTIONS} skia_use_lua=false skia_enable_tools=true skia_enable_spirv_validation=false modules"
     OPTIONS_DEBUG "${OPTIONS_DBG}"
     OPTIONS_RELEASE "${OPTIONS_REL}"
 )
