@@ -106,7 +106,7 @@ endif()
 set(OPTIONS "target_cpu=\"${VCPKG_TARGET_ARCHITECTURE}\"")
 set(OPTIONS_DBG "is_debug=true")
 set(OPTIONS_REL "is_official_build=true")
-vcpkg_list(SET SKIA_TARGETS ":skia")
+vcpkg_list(SET SKIA_TARGETS ":skia" ":modules")
 
 if(VCPKG_TARGET_IS_ANDROID)
     string(APPEND OPTIONS " target_os=\"android\"")
@@ -271,7 +271,7 @@ endif()
 
 vcpkg_gn_configure(
     SOURCE_PATH "${SOURCE_PATH}"
-    OPTIONS "${OPTIONS} skia_use_lua=false skia_enable_tools=true skia_enable_spirv_validation=false modules"
+    OPTIONS "${OPTIONS} skia_use_lua=false skia_enable_tools=true skia_enable_spirv_validation=false"
     OPTIONS_DEBUG "${OPTIONS_DBG}"
     OPTIONS_RELEASE "${OPTIONS_REL}"
 )
