@@ -268,6 +268,10 @@ if(VCPKG_TARGET_IS_UWP)
     string_to_gn_list(SKIA_LD_FLAGS "-APPCONTAINER WindowsApp.lib")
     string(APPEND OPTIONS " extra_ldflags=${SKIA_LD_FLAGS}")
 endif()
+if (${VCPKG_DETECTED_CMAKE_CXX_COMPILER} MATCHES "cl.exe$")
+    cmake_path(NATIVE_PATH CURRENT_INSTALLED_DIR installed_dir_native)
+    string(APPEND OPTIONS " extra_ldflags=\"/LIBPATH:${installed_dir_native}\\lib\"")
+endif()
 
 vcpkg_gn_configure(
     SOURCE_PATH "${SOURCE_PATH}"
