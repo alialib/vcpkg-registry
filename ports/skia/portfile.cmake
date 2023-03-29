@@ -269,13 +269,8 @@ if(VCPKG_TARGET_IS_UWP)
     string(APPEND OPTIONS " extra_ldflags=${SKIA_LD_FLAGS}")
 endif()
 if (${VCPKG_DETECTED_CMAKE_CXX_COMPILER} MATCHES "cl.exe$")
-    cmake_path(NATIVE_PATH CURRENT_INSTALLED_DIR installed_dir_native)
-    set(libpath_option "/LIBPATH:${installed_dir_native}\\lib")
-    string(REGEX REPLACE "([][+.*()^\ \\])" "\\\\\\1" libpath_option_escaped
-        "${libpath_option}")
-    string(REGEX REPLACE "([][+.*()^\ \\])" "\\\\\\1"
-        libpath_option_doubly_escaped "${libpath_option_escaped}")
-    string_to_gn_list(SKIA_LD_FLAGS "${libpath_option_doubly_escaped}")
+    set(libpath_option "/LIBPATH:${CURRENT_INSTALLED_DIR}/lib")
+    string_to_gn_list(SKIA_LD_FLAGS "${libpath_option}")
     string(APPEND OPTIONS " extra_ldflags=${SKIA_LD_FLAGS}")
 endif()
 
