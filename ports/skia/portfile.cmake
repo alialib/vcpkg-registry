@@ -3,7 +3,7 @@ include("${CMAKE_CURRENT_LIST_DIR}/skia-functions.cmake")
 vcpkg_from_git(
     OUT_SOURCE_PATH SOURCE_PATH
     URL https://github.com/google/skia
-    REF 9e51c2c9e231cf1350a476c2b1695066144593ce
+    REF f86f242886692a18f5adc1cf9cbd6740cd0870fd
     PATCHES
         disable-msvc-env-setup.patch
         uwp.patch
