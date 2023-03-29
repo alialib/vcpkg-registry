@@ -269,9 +269,12 @@ if(VCPKG_TARGET_IS_UWP)
     string(APPEND OPTIONS " extra_ldflags=${SKIA_LD_FLAGS}")
 endif()
 if (${VCPKG_DETECTED_CMAKE_CXX_COMPILER} MATCHES "cl.exe$")
-    set(libpath_option "/LIBPATH:${CURRENT_INSTALLED_DIR}/lib")
-    string_to_gn_list(SKIA_LD_FLAGS "${libpath_option}")
-    string(APPEND OPTIONS " extra_ldflags=${SKIA_LD_FLAGS}")
+    string_to_gn_list(SKIA_DEBUG_LD_FLAGS
+        "/LIBPATH:${CURRENT_INSTALLED_DIR}/debug/lib")
+    string_to_gn_list(SKIA_RELEASE_LD_FLAGS
+        "/LIBPATH:${CURRENT_INSTALLED_DIR}/lib")
+    string(APPEND OPTIONS_DEBUG " extra_ldflags=${SKIA_DEBUG_LD_FLAGS}")
+    string(APPEND OPTIONS_RELEASE " extra_ldflags=${SKIA_RELEASE_LD_FLAGS}")
 endif()
 
 vcpkg_gn_configure(
