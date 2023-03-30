@@ -323,12 +323,26 @@ vcpkg_replace_string("${CURRENT_PACKAGES_DIR}/include/skia/include/core/SkTypes.
 # vcpkg legacy layout omits "include/" component. Just duplicate.
 file(COPY "${CURRENT_PACKAGES_DIR}/include/skia/include/" DESTINATION "${CURRENT_PACKAGES_DIR}/include/skia")
 
-get_definitions(SKIA_DEFINITIONS_REL "${desc_release}" "//:skia")
-get_link_libs(SKIA_DEP_REL "${desc_release}" "//:skia")
+foreach(target IN LISTS SKIA_TARGETS)
+    get_definitions(definitions_rel "${desc_release}" "//${target}")
+    vcpkg_list(APPEND SKIA_DEFINITIONS_REL ${definitions_rel})
+    get_link_libs(dep_rel "${desc_release}" "//${target}")
+    vcpkg_list(APPEND SKIA_DEP_REL ${dep_rel})
+    if(NOT VCPKG_BUILD_TYPE)
+        get_definitions(definitions_dbg "${desc_debug}" "//${target}")
+        vcpkg_list(APPEND SKIA_DEFINITIONS_DBG ${definitions_dbg})
+        get_link_libs(dep_dbg "${desc_debug}" "//${target}")
+        vcpkg_list(APPEND SKIA_DEP_DBG ${dep_dbg})
+    endif()
+endforeach()
+
+vcpkg_list(REMOVE_DUPLICATES SKIA_DEFINITIONS_REL)
+vcpkg_list(REMOVE_DUPLICATES SKIA_DEP_REL)
 if(NOT VCPKG_BUILD_TYPE)
-    get_definitions(SKIA_DEFINITIONS_DBG "${desc_debug}" "//:skia")
-    get_link_libs(SKIA_DEP_DBG "${desc_debug}" "//:skia")
+    vcpkg_list(REMOVE_DUPLICATES SKIA_DEFINITIONS_DBG)
+    vcpkg_list(REMOVE_DUPLICATES SKIA_DEP_DBG)
 endif()
+
 file(MAKE_DIRECTORY "${CURRENT_PACKAGES_DIR}/share/unofficial-skia")
 configure_file("${CMAKE_CURRENT_LIST_DIR}/unofficial-skia-config.cmake" "${CURRENT_PACKAGES_DIR}/share/unofficial-skia/unofficial-skia-config.cmake" @ONLY)
 # vcpkg legacy
