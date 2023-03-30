@@ -330,6 +330,8 @@ if(NOT VCPKG_BUILD_TYPE)
     vcpkg_list(SET SKIA_DEP_DBG)
 endif()
 
+include(CMakePrintHelpers)
+
 cmake_print_variables(SKIA_TARGETS)
 
 foreach(target IN LISTS SKIA_TARGETS)
