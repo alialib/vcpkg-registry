@@ -106,7 +106,7 @@ endif()
 set(OPTIONS "target_cpu=\"${VCPKG_TARGET_ARCHITECTURE}\"")
 set(OPTIONS_DBG "is_debug=true")
 set(OPTIONS_REL "is_official_build=true")
-vcpkg_list(SET SKIA_TARGETS ":skia" ":modules" ":experimental")
+vcpkg_list(SET SKIA_TARGETS ":skia" "modules/skshaper:skshaper" "modules/skottie:skottie" "modules/skparagraph:skparagraph" "experimental/sktext:sktext")
 
 if(VCPKG_TARGET_IS_ANDROID)
     string(APPEND OPTIONS " target_os=\"android\"")
