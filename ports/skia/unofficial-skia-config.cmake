@@ -32,9 +32,11 @@ if(NOT TARGET unofficial::skia::skia)
             INTERFACE_INCLUDE_DIRECTORIES "${z_vcpkg_skia_root}/include/skia"
         )
 
-        find_library(z_vcpkg_skia_lib_release NAMES ${name} ${name}.dll PATHS "${z_vcpkg_skia_root}/lib" NO_DEFAULT_PATH)
-        find_library(z_vcpkg_skia_lib_debug NAMES ${name} ${name}.dll PATHS "${z_vcpkg_skia_root}/debug/lib" NO_DEFAULT_PATH)
-        mark_as_advanced(z_vcpkg_skia_lib_release z_vcpkg_skia_lib_debug)
+        find_library(z_vcpkg_skia_${name}_lib_release NAMES ${name} ${name}.dll PATHS "${z_vcpkg_skia_root}/lib" NO_DEFAULT_PATH)
+        find_library(z_vcpkg_skia_${name}_lib_debug NAMES ${name} ${name}.dll PATHS "${z_vcpkg_skia_root}/debug/lib" NO_DEFAULT_PATH)
+        mark_as_advanced(z_vcpkg_skia_${name}_lib_release z_vcpkg_skia_${name}_lib_debug)
+        set(z_vcpkg_skia_lib_release z_vcpkg_skia_${name}_lib_release)
+        set(z_vcpkg_skia_lib_debug z_vcpkg_skia_${name}_lib_debug)
 
         set(z_vcpkg_skia_config_debug "\$<CONFIG:Debug>")
         if(NOT z_vcpkg_skia_lib_debug)
@@ -42,10 +44,11 @@ if(NOT TARGET unofficial::skia::skia)
         endif()
 
         z_vcpkg_skia_get_link_libraries(
-            z_vcpkg_skia_link_libs_release
+            z_vcpkg_skia_${name}_link_libs_release
             "${z_vcpkg_skia_root}/lib;${z_vcpkg_skia_root}/debug/lib"
             "@SKIA_DEP_REL@"
         )
+        set(z_vcpkg_skia_link_libs_release z_vcpkg_skia_${name}_link_libs_release)
         set_target_properties(unofficial::skia::${name} PROPERTIES
             IMPORTED_CONFIGURATIONS RELEASE
             IMPORTED_LINK_INTERFACE_LANGUAGES_RELEASE "C"
@@ -56,10 +59,11 @@ if(NOT TARGET unofficial::skia::skia)
 
         if(z_vcpkg_skia_lib_debug)
             z_vcpkg_skia_get_link_libraries(
-                z_vcpkg_skia_link_libs_debug
+                z_vcpkg_skia_${name}_link_libs_debug
                 "${z_vcpkg_skia_root}/debug/lib;${z_vcpkg_skia_root}/lib"
                 "@SKIA_DEP_DBG@"
             )
+            set(z_vcpkg_skia_link_libs_debug z_vcpkg_skia_${name}_link_libs_debug)
             set_property(TARGET unofficial::skia::${name} APPEND PROPERTY
                 IMPORTED_CONFIGURATIONS DEBUG
             )
