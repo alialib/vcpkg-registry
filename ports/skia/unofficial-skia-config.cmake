@@ -84,6 +84,7 @@ if(NOT TARGET unofficial::skia::skia)
     z_vcpkg_skia_find_and_add_library(skparagraph)
     z_vcpkg_skia_find_and_add_library(skshaper)
     z_vcpkg_skia_find_and_add_library(sktext)
+    z_vcpkg_skia_find_and_add_library(skunicode)
 
     unset(z_vcpkg_skia_find_and_add_library)
     unset(z_vcpkg_skia_config_debug)
