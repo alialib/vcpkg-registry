@@ -312,6 +312,7 @@ vcpkg_gn_install(
 file(COPY "${SOURCE_PATH}/include"
           "${SOURCE_PATH}/modules"
           "${SOURCE_PATH}/src"
+          "${SOURCE_PATH}/experimental"
     DESTINATION "${CURRENT_PACKAGES_DIR}/include/skia"
     FILES_MATCHING PATTERN "*.h"
 )
