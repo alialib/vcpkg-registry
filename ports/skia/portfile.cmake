@@ -311,6 +311,7 @@ vcpkg_gn_install(
 # Use skia repository layout in ${CURRENT_PACKAGES_DIR}/include/skia
 file(COPY "${SOURCE_PATH}/include"
           "${SOURCE_PATH}/modules"
+          "${SOURCE_PATH}/third_party/icu"
           "${SOURCE_PATH}/src"
           "${SOURCE_PATH}/experimental"
     DESTINATION "${CURRENT_PACKAGES_DIR}/include/skia"
