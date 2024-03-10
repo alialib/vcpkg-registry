@@ -1,0 +1,15 @@
+diff --git a/BUILD.gn b/BUILD.gn
+index c64e434235..4ddc38157e 100644
+--- a/BUILD.gn
++++ b/BUILD.gn
+@@ -1731,10 +1731,6 @@ group("modules") {
+     "modules/skshaper",
+     "modules/svg",
+   ]
+-
+-  if (is_wasm) {
+-    deps += [ "modules/canvaskit" ]
+-  }
+ }
+
+ config("our_vulkan_headers") {
